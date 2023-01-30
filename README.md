@@ -1,13 +1,17 @@
-# Test compilation of program that requires libav*
+# Test compilation with libav* requirement
 
 ## Native Windows Build
-mkdr build-windows
+
+```mkdr build-windows
 cd build-windows
 cmake ..
 cmake --build . --config Release --target ALL_BUILD -- /maxcpucount:14
-
+```
 
 ## Native Linux Build
+
+### Requirements
+```
 apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -21,23 +25,25 @@ apt-get update && apt-get install -y \
     libavdevice-dev \
     libavutil-dev \
     pkg-config
-
+```
+### Compile
+```
 mkdir build-linux
 cd build-linux
 cmake ..
 make
-
-
+```
 ## Docker Linux Build
 
 ### Build Docker Image
-cd docker
+```cd docker
 docker build -t ffmpeg-build .
-
+```
 ### Compile
-docker run --rm -v ${PWD}:/data -it ffmpeg-build bash
+```docker run --rm -v ${PWD}:/data -it ffmpeg-build bash
 cd /data
 mkdir build-linux
 cd build-linux
 cmake ..
 make
+```
